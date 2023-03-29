@@ -1,0 +1,162 @@
+[info] welcome to sbt 1.4.7 (Red Hat, Inc. Java 1.8.0_362)
+[info] loading settings for project sparkexperiments-build from plugins.sbt ...
+[info] loading project definition from /root/SparkExperiments/project
+Local Spark deployment. Please add -DsparkDeploy=cluster to your sbt command to assemble for Spark cluster.
+[info] loading settings for project sparkExperiment from build.sbt ...
+[info] set current project to SparkExperiments (in build file:/root/SparkExperiments/)
+[info] running (fork) exp.LineageOverheadExp1 10000 10
+[error] Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+[info] 23/03/29 12:30:22 INFO SparkContext: Running Spark version 3.3.0
+[info] 23/03/29 12:30:23 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[info] 23/03/29 12:30:23 INFO ResourceUtils: ==============================================================
+[info] 23/03/29 12:30:23 INFO ResourceUtils: No custom resources configured for spark.driver.
+[info] 23/03/29 12:30:23 INFO ResourceUtils: ==============================================================
+[info] 23/03/29 12:30:23 INFO SparkContext: Submitted application: GraphxExperiments
+[info] 23/03/29 12:30:23 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+[info] 23/03/29 12:30:23 INFO ResourceProfile: Limiting resource is cpu
+[info] 23/03/29 12:30:23 INFO ResourceProfileManager: Added ResourceProfile id: 0
+[info] 23/03/29 12:30:23 INFO SecurityManager: Changing view acls to: root
+[info] 23/03/29 12:30:23 INFO SecurityManager: Changing modify acls to: root
+[info] 23/03/29 12:30:23 INFO SecurityManager: Changing view acls groups to: 
+[info] 23/03/29 12:30:23 INFO SecurityManager: Changing modify acls groups to: 
+[info] 23/03/29 12:30:23 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(root); groups with view permissions: Set(); users  with modify permissions: Set(root); groups with modify permissions: Set()
+[info] 23/03/29 12:30:23 INFO Utils: Successfully started service 'sparkDriver' on port 38766.
+[info] 23/03/29 12:30:23 INFO SparkEnv: Registering MapOutputTracker
+[info] 23/03/29 12:30:23 INFO SparkEnv: Registering BlockManagerMaster
+[info] 23/03/29 12:30:23 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+[info] 23/03/29 12:30:23 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+[info] 23/03/29 12:30:23 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+[info] 23/03/29 12:30:23 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-27843ade-03e0-4bf2-9640-5d22830674bc
+[info] 23/03/29 12:30:23 INFO MemoryStore: MemoryStore started with capacity 15.8 GiB
+[info] 23/03/29 12:30:23 INFO SparkEnv: Registering OutputCommitCoordinator
+[info] 23/03/29 12:30:24 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+[info] 23/03/29 12:30:24 INFO Executor: Starting executor ID driver on host ic058
+[info] 23/03/29 12:30:24 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+[info] 23/03/29 12:30:24 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 41957.
+[info] 23/03/29 12:30:24 INFO NettyBlockTransferService: Server created on ic058:41957
+[info] 23/03/29 12:30:24 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+[info] 23/03/29 12:30:24 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, ic058, 41957, None)
+[info] 23/03/29 12:30:24 INFO BlockManagerMasterEndpoint: Registering block manager ic058:41957 with 15.8 GiB RAM, BlockManagerId(driver, ic058, 41957, None)
+[info] 23/03/29 12:30:24 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, ic058, 41957, None)
+[info] 23/03/29 12:30:24 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, ic058, 41957, None)
+[info] (48) MapPartitionsRDD[1] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |   ParallelCollectionRDD[0] at parallelize at lineageOverheadExp1.scala:14 [Memory Deserialized 1x Replicated]
+[info] Iteration 0 takes 2301 ms
+[info] (48) MapPartitionsRDD[2] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |   MapPartitionsRDD[1] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   ParallelCollectionRDD[0] at parallelize at lineageOverheadExp1.scala:14 [Memory Deserialized 1x Replicated]
+[info] Iteration 1 takes 124 ms
+[info] (48) MapPartitionsRDD[3] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |   MapPartitionsRDD[2] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[1] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   ParallelCollectionRDD[0] at parallelize at lineageOverheadExp1.scala:14 [Memory Deserialized 1x Replicated]
+[info] Iteration 2 takes 63 ms
+[info] (48) MapPartitionsRDD[4] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |   MapPartitionsRDD[3] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[2] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[1] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   ParallelCollectionRDD[0] at parallelize at lineageOverheadExp1.scala:14 [Memory Deserialized 1x Replicated]
+[info] Iteration 3 takes 60 ms
+[info] (48) MapPartitionsRDD[5] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |   MapPartitionsRDD[4] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[3] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[2] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[1] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   ParallelCollectionRDD[0] at parallelize at lineageOverheadExp1.scala:14 [Memory Deserialized 1x Replicated]
+[info] Iteration 4 takes 72 ms
+[info] (48) MapPartitionsRDD[6] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |   MapPartitionsRDD[5] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[4] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[3] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[2] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[1] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   ParallelCollectionRDD[0] at parallelize at lineageOverheadExp1.scala:14 [Memory Deserialized 1x Replicated]
+[info] Iteration 5 takes 70 ms
+[info] (48) MapPartitionsRDD[7] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |   MapPartitionsRDD[6] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[5] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[4] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[3] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[2] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[1] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   ParallelCollectionRDD[0] at parallelize at lineageOverheadExp1.scala:14 [Memory Deserialized 1x Replicated]
+[info] Iteration 6 takes 60 ms
+[info] (48) MapPartitionsRDD[8] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |   MapPartitionsRDD[7] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[6] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[5] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[4] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[3] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[2] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[1] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   ParallelCollectionRDD[0] at parallelize at lineageOverheadExp1.scala:14 [Memory Deserialized 1x Replicated]
+[info] Iteration 7 takes 50 ms
+[info] (48) MapPartitionsRDD[9] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |   MapPartitionsRDD[8] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[7] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[6] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[5] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[4] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[3] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[2] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[1] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   ParallelCollectionRDD[0] at parallelize at lineageOverheadExp1.scala:14 [Memory Deserialized 1x Replicated]
+[info] Iteration 8 takes 48 ms
+[info] (48) MapPartitionsRDD[10] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |   MapPartitionsRDD[9] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[8] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[7] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[6] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[5] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[4] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[3] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[2] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   MapPartitionsRDD[1] at map at lineageOverheadExp1.scala:19 [Memory Deserialized 1x Replicated]
+[info]  |       CachedPartitions: 48; MemorySize: 39.9 KiB; DiskSize: 0.0 B
+[info]  |   ParallelCollectionRDD[0] at parallelize at lineageOverheadExp1.scala:14 [Memory Deserialized 1x Replicated]
+[info] Iteration 9 takes 38 ms
+[success] Total time: 9 s, completed Mar 29, 2023 12:30:27 PM
