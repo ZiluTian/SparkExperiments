@@ -4,7 +4,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 object Run {    
     @transient lazy val conf: SparkConf = new SparkConf()
-      .setAppName("GraphxExperiments")
+      .setAppName("SparkExperiments")
       .set("spark.driver.maxResultSize", "10g")
       .set("spark.hadoop.dfs.replication", "1")
       .set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
