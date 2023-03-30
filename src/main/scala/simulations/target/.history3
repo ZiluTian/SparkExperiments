@@ -1,9 +1,0 @@
-1680191695650:compile
-1680191709574:runMain simulations.v2.GameOfLife
-1680191715165:show discoveredMainClasses
-1680191775735:compile
-1680191777781:show discoveredMainClasses
-1680191779053:reload
-1680191780663:exit
-1680191908461:runMain simulations.v2.GameOfLife
-1680191923463:runMain simulations.v1.GameOfLife

@@ -8,11 +8,11 @@ class Cell(id: Long, cfreq: Int, cint: Int) extends Actor(id) {
     var aliveNeighbors: Int = 0
     var alive: Int = if (Random.nextBoolean()) 1 else 0
 
-    override def run(messages: List[Any]): Actor = {
+    override def run(messages: List[Message]): Actor = {
         sendMessages.clear()
         aliveNeighbors = 0
         messages.foreach(m => {
-            aliveNeighbors = aliveNeighbors + m.asInstanceOf[Int]
+            aliveNeighbors = aliveNeighbors + m.value
         })
 
         if ((alive==1) && (aliveNeighbors > 3 || aliveNeighbors < 2)) {

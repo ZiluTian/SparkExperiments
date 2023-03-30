@@ -30,7 +30,7 @@ class Actor(var id: Long) {
     * messages: a list of input messages
     * return: (a list of output messages, passed rounds)
     */
-  def run(messages: List[Any]): Actor = {
+  def run(messages: List[Message]): Actor = {
     ???
   }
 }
