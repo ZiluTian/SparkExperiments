@@ -6,6 +6,7 @@ val project_name = "SparkExperiments"
 name := project_name
 
 val sparkVersion = "3.3.0"
+val breezeVersion = "0.13.2"
 
 run / fork := true
 
@@ -25,6 +26,8 @@ lazy val sparkSettings = if (sparkDeployOption == "local") {
 lazy val sparkExperiment = (project in file("."))
   .settings(
     name := f"${project_name}",
+    libraryDependencies += "org.scalanlp" %% "breeze" % breezeVersion,
+    libraryDependencies += "org.scalanlp" %% "breeze-natives" % breezeVersion,
     // scalacOptions += "-Ywarn-unused",
     sparkSettings,
     Test / parallelExecution := false,
