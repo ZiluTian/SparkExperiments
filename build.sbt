@@ -10,7 +10,6 @@ val sparkVersion = "3.3.0"
 run / fork := true
 
 val sparkDeployOption = Option(System.getProperty("sparkDeploy")).getOrElse("local")
-
 lazy val sparkSettings = if (sparkDeployOption == "local") { 
   println("Local Spark deployment. Please add -DsparkDeploy=cluster to your sbt command to assemble for Spark cluster.")
   Seq(

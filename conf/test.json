@@ -1,0 +1,18 @@
+{
+    "experiments": ["gameOfLife"],
+    "gameOfLife": {
+        "input_graph": ["/root/FlinkExperiments/data/2DTorus_10000_graphx.txt"],
+        "classpath": "simulations.GameOfLife3"
+    },
+    "cfreqs": [1],
+    "cinterval": [1],
+    "cores": [20],
+    "log_dir": "/root/GraphxExperiments/log/",
+    "repeat": 1,
+    "spark": {
+        "home": "/root/spark3.3",
+        "master": "spark://ic057:7077",
+        "driver_mem": "70g",
+        "executor_mem": "70g"
+    }
+}
