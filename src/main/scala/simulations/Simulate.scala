@@ -71,7 +71,7 @@ object Simulate extends SparkTest {
 
         t2 = System.currentTimeMillis()
         time_seq = time_seq ::: List(t2-t1)
-        // println(f"Iteration ${currentTurn} takes ${t2-t1} ms")
+        println(f"Iteration ${currentTurn} takes ${t2-t1} ms")
         currentTurn += elapsedRound
       }
 
