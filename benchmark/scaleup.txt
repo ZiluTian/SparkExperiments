@@ -1,0 +1,17 @@
+log/0/scaleup_gameOfLife_cores50_cfreq1_cint1_170556:[info] Average time per round 419
+log/0/scaleup_gameOfLife_cores50_cfreq1_cint1_170747:[info] Average time per round 853
+log/0/scaleup_gameOfLife_cores50_cfreq1_cint1_171100:[info] Average time per round 1318
+log/0/scaleup_gameOfLife_cores50_cfreq1_cint1_171548:[info] Average time per round 2503
+log/0/scaleup_gameOfLife_cores50_cfreq1_cint1_172437:[info] Average time per round 3891
+
+log/1/scaleup_gameOfLife_cores50_cfreq1_cint1_173808:[info] Average time per round 365
+log/1/scaleup_gameOfLife_cores50_cfreq1_cint1_173943:[info] Average time per round 822
+log/1/scaleup_gameOfLife_cores50_cfreq1_cint1_174252:[info] Average time per round 1268
+log/1/scaleup_gameOfLife_cores50_cfreq1_cint1_174730:[info] Average time per round 2935
+log/1/scaleup_gameOfLife_cores50_cfreq1_cint1_175746:[info] Average time per round 3443
+
+log/2/scaleup_gameOfLife_cores50_cfreq1_cint1_180947:[info] Average time per round 381
+log/2/scaleup_gameOfLife_cores50_cfreq1_cint1_181125:[info] Average time per round 823
+log/2/scaleup_gameOfLife_cores50_cfreq1_cint1_181433:[info] Average time per round 1221
+log/2/scaleup_gameOfLife_cores50_cfreq1_cint1_181901:[info] Average time per round 2572
+log/2/scaleup_gameOfLife_cores50_cfreq1_cint1_182804:[info] Average time per round 3339
