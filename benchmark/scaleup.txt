@@ -1,17 +1,64 @@
+log/0/scaleup_ERM_cores50_cfreq1_cint1_193722:Average time per round 378
+log/0/scaleup_ERM_cores50_cfreq1_cint1_193752:Average time per round 2484
+log/0/scaleup_ERM_cores50_cfreq1_cint1_194008:Average time per round 9480
+log/0/scaleup_ERM_cores50_cfreq1_cint1_194819:Average time per round 91533
+log/0/scaleup_ERM_cores50_cfreq1_cint1_210535:Average time per round 334572
+log/0/scaleup_SBM_cores50_cfreq1_cint1_014726:Average time per round 275
+log/0/scaleup_SBM_cores50_cfreq1_cint1_014750:Average time per round 1121
+log/0/scaleup_SBM_cores50_cfreq1_cint1_014857:Average time per round 2736
+log/0/scaleup_SBM_cores50_cfreq1_cint1_015127:Average time per round 21586
+log/0/scaleup_SBM_cores50_cfreq1_cint1_020954:Average time per round 53967
+log/0/scaleup_stockMarket_cores50_cfreq1_cint1_183022:Average time per round 460
+log/0/scaleup_stockMarket_cores50_cfreq1_cint1_183206:Average time per round 1556
+log/0/scaleup_stockMarket_cores50_cfreq1_cint1_183732:Average time per round 2692
+log/0/scaleup_stockMarket_cores50_cfreq1_cint1_184646:Average time per round 7300
+log/0/scaleup_stockMarket_cores50_cfreq1_cint1_191125:Average time per round 7663
 log/0/scaleup_gameOfLife_cores50_cfreq1_cint1_170556:[info] Average time per round 419
 log/0/scaleup_gameOfLife_cores50_cfreq1_cint1_170747:[info] Average time per round 853
 log/0/scaleup_gameOfLife_cores50_cfreq1_cint1_171100:[info] Average time per round 1318
 log/0/scaleup_gameOfLife_cores50_cfreq1_cint1_171548:[info] Average time per round 2503
 log/0/scaleup_gameOfLife_cores50_cfreq1_cint1_172437:[info] Average time per round 3891
 
+log/1/scaleup_ERM_cores50_cfreq1_cint1_035958:Average time per round 404
+log/1/scaleup_ERM_cores50_cfreq1_cint1_040029:Average time per round 2621
+log/1/scaleup_ERM_cores50_cfreq1_cint1_040253:Average time per round 8016
+log/1/scaleup_ERM_cores50_cfreq1_cint1_040950:Average time per round 118590
+log/1/scaleup_ERM_cores50_cfreq1_cint1_054939:Average time per round 337568
+log/1/scaleup_SBM_cores50_cfreq1_cint1_103403:Average time per round 266
+log/1/scaleup_SBM_cores50_cfreq1_cint1_103426:Average time per round 1334
+log/1/scaleup_SBM_cores50_cfreq1_cint1_103544:Average time per round 3213
+log/1/scaleup_SBM_cores50_cfreq1_cint1_103837:Average time per round 20522
+log/1/scaleup_SBM_cores50_cfreq1_cint1_105612:Average time per round 60150
+log/1/scaleup_stockMarket_cores50_cfreq1_cint1_025546:Average time per round 459
+log/1/scaleup_stockMarket_cores50_cfreq1_cint1_025729:Average time per round 1248
+log/1/scaleup_stockMarket_cores50_cfreq1_cint1_030153:Average time per round 2330
+log/1/scaleup_stockMarket_cores50_cfreq1_cint1_030955:Average time per round 7784
+log/1/scaleup_stockMarket_cores50_cfreq1_cint1_033611:Average time per round 7027
 log/1/scaleup_gameOfLife_cores50_cfreq1_cint1_173808:[info] Average time per round 365
 log/1/scaleup_gameOfLife_cores50_cfreq1_cint1_173943:[info] Average time per round 822
 log/1/scaleup_gameOfLife_cores50_cfreq1_cint1_174252:[info] Average time per round 1268
 log/1/scaleup_gameOfLife_cores50_cfreq1_cint1_174730:[info] Average time per round 2935
 log/1/scaleup_gameOfLife_cores50_cfreq1_cint1_175746:[info] Average time per round 3443
 
+log/2/scaleup_ERM_cores50_cfreq1_cint1_131033:Average time per round 447
+log/2/scaleup_ERM_cores50_cfreq1_cint1_131106:Average time per round 2203
+log/2/scaleup_ERM_cores50_cfreq1_cint1_131309:Average time per round 7229
+log/2/scaleup_ERM_cores50_cfreq1_cint1_131925:Average time per round 94480
+log/2/scaleup_ERM_cores50_cfreq1_cint1_143908:Average time per round 260864
+log/2/scaleup_SBM_cores50_cfreq1_cint1_181942:Average time per round 274
+log/2/scaleup_SBM_cores50_cfreq1_cint1_182006:Average time per round 1150
+log/2/scaleup_SBM_cores50_cfreq1_cint1_182115:Average time per round 3090
+log/2/scaleup_SBM_cores50_cfreq1_cint1_182403:Average time per round 19517
+log/2/scaleup_SBM_cores50_cfreq1_cint1_184047:Average time per round 52864
+log/2/scaleup_stockMarket_cores50_cfreq1_cint1_114710:Average time per round 449
+log/2/scaleup_stockMarket_cores50_cfreq1_cint1_114853:Average time per round 1316
+log/2/scaleup_stockMarket_cores50_cfreq1_cint1_115330:Average time per round 2127
+log/2/scaleup_stockMarket_cores50_cfreq1_cint1_120051:Average time per round 9401
+log/2/scaleup_stockMarket_cores50_cfreq1_cint1_123232:Average time per round 11277
 log/2/scaleup_gameOfLife_cores50_cfreq1_cint1_180947:[info] Average time per round 381
 log/2/scaleup_gameOfLife_cores50_cfreq1_cint1_181125:[info] Average time per round 823
 log/2/scaleup_gameOfLife_cores50_cfreq1_cint1_181433:[info] Average time per round 1221
 log/2/scaleup_gameOfLife_cores50_cfreq1_cint1_181901:[info] Average time per round 2572
 log/2/scaleup_gameOfLife_cores50_cfreq1_cint1_182804:[info] Average time per round 3339
+
+
