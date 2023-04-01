@@ -3,7 +3,7 @@
     "gameOfLife": {
         "input_graph": ["/root/FlinkExperiments/data/2DTorus_1000_graphx.txt", "/root/FlinkExperiments/data/2DTorus_5000_graphx.txt", "/root/FlinkExperiments/data/2DTorus_10000_graphx.txt", 
         "/root/FlinkExperiments/data/2DTorus_50000_graphx.txt", "/root/FlinkExperiments/data/2DTorus_100000_graphx.txt"],
-        "classpath": "simulations.GameOfLife3"
+        "classpath": "simulations.GameOfLife"
     },
     "stockMarket": {
         "input_graph": ["/root/FlinkExperiments/data/stockMarket_1000_graphx.txt", "/root/FlinkExperiments/data/stockMarket_5000_graphx.txt", "/root/FlinkExperiments/data/stockMarket_10000_graphx.txt",
@@ -23,7 +23,7 @@
     "cfreqs": [1],
     "cinterval": [1],
     "cores": [50],
-    "log_dir": "/root/GraphxExperiments/log/",
+    "log_dir": "log",
     "repeat": 3,
     "spark": {
         "home": "/root/spark3.3",

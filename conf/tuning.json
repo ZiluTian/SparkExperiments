@@ -1,8 +1,8 @@
 {
-    "experiments": ["gameOfLife", "stockMarket", "ERM", "SBM"],
+    "experiments": ["gameOfLife"],
     "gameOfLife": {
         "input_graph": ["/root/FlinkExperiments/data/2DTorus_10000_graphx.txt"],
-        "classpath": "simulations.GameOfLife3"
+        "classpath": "simulations.GameOfLife"
     },
     "stockMarket": {
         "input_graph": ["/root/FlinkExperiments/data/stockMarket_10000_graphx.txt"],
@@ -19,11 +19,11 @@
     "cfreqs": [1],
     "cinterval": [1],
     "cores": [1, 10, 20, 50],
-    "log_dir": "/root/GraphxExperiments/log/",
+    "log_dir": "log",
     "repeat": 3,
     "spark": {
         "home": "/root/spark3.3",
-        "master": "spark://ic057:7077",
+        "master": "local",
         "driver_mem": "70g",
         "executor_mem": "70g"
     }
