@@ -1,0 +1,39 @@
+log/0/commFreq_gameOfLife_cores50_cfreq10_cint1_172007:[info] Average time per round 4011
+log/0/commFreq_gameOfLife_cores50_cfreq20_cint1_173400:[info] Average time per round 7159
+log/0/commFreq_gameOfLife_cores50_cfreq30_cint1_175819:[info] Average time per round 9485
+log/1/commFreq_gameOfLife_cores50_cfreq10_cint1_183024:[info] Average time per round 3927
+log/1/commFreq_gameOfLife_cores50_cfreq20_cint1_184355:[info] Average time per round 6410
+log/1/commFreq_gameOfLife_cores50_cfreq30_cint1_190544:[info] Average time per round 9307
+log/2/commFreq_gameOfLife_cores50_cfreq10_cint1_193713:[info] Average time per round 3679
+log/2/commFreq_gameOfLife_cores50_cfreq20_cint1_194955:[info] Average time per round 6898
+log/2/commFreq_gameOfLife_cores50_cfreq30_cint1_201322:[info] Average time per round 9217
+
+log/0/commFreq_SBM_cores50_cfreq10_cint1_222654:[info] Average time per round 14718
+log/0/commFreq_SBM_cores50_cfreq20_cint1_223949:[info] Average time per round 24957
+log/0/commFreq_SBM_cores50_cfreq30_cint1_230105:[info] Average time per round 41691
+log/1/commFreq_SBM_cores50_cfreq10_cint1_233621:[info] Average time per round 8781
+log/1/commFreq_SBM_cores50_cfreq20_cint1_234404:[info] Average time per round 15688
+log/1/commFreq_SBM_cores50_cfreq30_cint1_235734:[info] Average time per round 22623
+log/2/commFreq_SBM_cores50_cfreq10_cint1_001652:[info] Average time per round 9828
+log/2/commFreq_SBM_cores50_cfreq20_cint1_002528:[info] Average time per round 25185
+log/2/commFreq_SBM_cores50_cfreq30_cint1_004656:[info] Average time per round 22667
+
+log/0/commFreq_stockMarket_cores50_cfreq10_cint1_223446:[info] Average time per round 7083
+log/0/commFreq_stockMarket_cores50_cfreq20_cint1_225849:[info] Average time per round 18807
+log/0/commFreq_stockMarket_cores50_cfreq30_cint1_000202:[info] Average time per round 28548
+log/0/commFreq_stockMarket_cores50_cfreq10_cint1_145147:[info] Average time per round 7755
+log/0/commFreq_stockMarket_cores50_cfreq20_cint1_160005:[info] Average time per round 15346
+log/0/commFreq_stockMarket_cores50_cfreq30_cint1_174540:[info] Average time per round 26209
+log/1/commFreq_stockMarket_cores50_cfreq10_cint1_203645:[info] Average time per round 8115
+log/1/commFreq_stockMarket_cores50_cfreq20_cint1_214857:[info] Average time per round 13894
+log/1/commFreq_stockMarket_cores50_cfreq30_cint1_000426:[info] Average time per round 26670
+
+log/0/commFreq_ERM_cores50_cfreq10_cint1_224224:[info] Average time per round 56842
+log/0/commFreq_ERM_cores50_cfreq20_cint1_233023:[info] Average time per round 65114
+log/0/commFreq_ERM_cores50_cfreq30_cint1_002511:[info] Average time per round 142087
+log/0/commFreq_ERM_cores50_cfreq10_cint1_151807:[info] Average time per round 49735
+log/0/commFreq_ERM_cores50_cfreq20_cint1_165147:[info] Average time per round 63998
+log/0/commFreq_ERM_cores50_cfreq30_cint1_191340:[info] Average time per round 98818
+log/1/commFreq_ERM_cores50_cfreq10_cint1_210418:[info] Average time per round 52935
+log/1/commFreq_ERM_cores50_cfreq20_cint1_223546:[info] Average time per round 105688
+log/1/commFreq_ERM_cores50_cfreq30_cint1_013358:[info] Average time per round 124884
