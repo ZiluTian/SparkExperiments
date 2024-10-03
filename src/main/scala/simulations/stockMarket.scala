@@ -5,23 +5,12 @@ import scala.io.Source
 
 object StockMarket {
     def main(args: Array[String]): Unit = {
-        val edgeFilePath: String = args(0)
-        val cfreq: Int = args(1).toInt
-        val interval: Int = args(2).toInt
+        val totalAgents: Int = args(0).toInt
+        
+        val graph = util.GraphFactory.bipartite(1, totalAgents - 1)
 
-        val source = Source.fromFile(edgeFilePath)
-        var edges: Map[Long, List[Long]] = Map[Long, List[Long]]()
-
-        for (line <- source.getLines()) {
-            val fields = line.split(" ")
-            val srcId: Long = fields(0).toLong
-            val dstId: Long = fields(1).toLong
-            edges = edges + (srcId -> (dstId :: edges.getOrElse(srcId, List())))
-        }
-        source.close()
-
-        val vertices: List[(Long, List[List[Double]])] = edges.map(i => {
-            val stock_timeseries: List[Double] = List(100.0)     
+        val vertices: List[(Long, List[List[Double]])] = graph.adjacencyList().map(i => {
+            val stock_timeseries: List[Double] = List(100.0)
             val lastDividend: Double = 0
             val lastAvg: Double = 100.0
             val currentPrice: Double = 100.0
@@ -40,104 +29,103 @@ object StockMarket {
 
             val rules = List(0, 0, 0, 0, 0.0, Random.nextInt(5), 0)  
 
-            (i._1, List(stock_timeseries, marketState, timer, traderState, rules, List(interval.toDouble)))
+            (i._1, List(stock_timeseries, marketState, timer, traderState, rules))
         }).toList
 
         // define the maximum number of iterations
         val maxIterations = 200
-    val priceAdjustmentFactor: Double = 0.01
-    val interestRate: Double = 0.0001
+        val priceAdjustmentFactor: Double = 0.01
+        val interestRate: Double = 0.0001
 
-    def update(window: Double, timer: Double, lastAvg: Double, stock_timeseries: List[Double]): Int = {
-        // moving window    
-        var calculated_avg: Double = -1
-        var sumPrice: Double = 0
+        def update(window: Double, timer: Double, lastAvg: Double, stock_timeseries: List[Double]): Int = {
+            // moving window    
+            var calculated_avg: Double = -1
+            var sumPrice: Double = 0
 
-        if (timer > window) {
-            var i: Int = (timer-window).toInt
-            while(i<timer){
-                sumPrice = stock_timeseries(i) + sumPrice  
-                i += 1
+            if (timer > window) {
+                var i: Int = (timer-window).toInt
+                while(i<timer){
+                    sumPrice = stock_timeseries(i) + sumPrice  
+                    i += 1
+                }
+                calculated_avg = sumPrice/window;
+            } else {
+                var i = 0
+                while (i<timer){
+                    sumPrice += stock_timeseries(i)
+                    i += 1  
+                }
+                calculated_avg = sumPrice/timer;
             }
-            calculated_avg = sumPrice/window;
-        } else {
-            var i = 0
-            while (i<timer){
-                sumPrice += stock_timeseries(i)
-                i += 1  
+
+            if (lastAvg < calculated_avg){
+                1
+            } else {
+                0
             }
-            calculated_avg = sumPrice/timer;
         }
 
-        if (lastAvg < calculated_avg){
-            1
-        } else {
-            0
-        }
-    }
+        // return (action, cash, shares)
+        def evalRule(rule: Int, stockPrice: Double, marketState: List[Double], cash: Double, shares: Double): (Int, Double, Double) = {
+            // assert(marketState.size == 7)
+            val lastDividend = marketState(0)
+            val lastAvg = marketState(1)
+            val currentPrice = marketState(2)
+            val dividendIncrease = marketState(3)
+            val recent10AvgInc = marketState(4)
+            val recent50AvgInc = marketState(5)   
+            val recent100AvgInc = marketState(6)    
 
-    // return (action, cash, shares)
-    def evalRule(rule: Int, stockPrice: Double, marketState: List[Double], cash: Double, shares: Double): (Int, Double, Double) = {
-        // assert(marketState.size == 7)
-        val lastDividend = marketState(0)
-        val lastAvg = marketState(1)
-        val currentPrice = marketState(2)
-        val dividendIncrease = marketState(3)
-        val recent10AvgInc = marketState(4)
-        val recent50AvgInc = marketState(5)   
-        val recent100AvgInc = marketState(6)    
+            var action = 0
+            val buy = 1
+            val sell = 2
 
-        var action = 0
-        val buy = 1
-        val sell = 2
-
-        rule match {
-            case 1 => 
-                if (dividendIncrease == 1 && stockPrice < cash) {
-                    action = buy
-                } else if (dividendIncrease == 2 && shares > 1) {
-                    action = sell
-                } 
-            case 2 =>
-                if (recent10AvgInc == 1 && shares >= 1){
-                    action = sell
-                } else if (stockPrice < cash && recent10AvgInc == 2){
-                    action = buy
-                } 
-            case 3 =>
-                if (recent50AvgInc == 1 && shares >= 1){
-                    action = sell
-                } else if (stockPrice < cash && recent50AvgInc == 2){
-                    action = buy
-                } 
-            case 4 =>
-                if (recent100AvgInc == 1 && shares >= 1){
-                    action = sell
-                } else if (stockPrice < cash && recent100AvgInc == 2){
-                    action = buy
-                } 
-            case _ => 
-                if (Random.nextBoolean){
-                    if (stockPrice < cash) {
+            rule match {
+                case 1 => 
+                    if (dividendIncrease == 1 && stockPrice < cash) {
+                        action = buy
+                    } else if (dividendIncrease == 2 && shares > 1) {
+                        action = sell
+                    } 
+                case 2 =>
+                    if (recent10AvgInc == 1 && shares >= 1){
+                        action = sell
+                    } else if (stockPrice < cash && recent10AvgInc == 2){
                         action = buy
                     } 
-                } else {
-                    if (shares > 1) {
+                case 3 =>
+                    if (recent50AvgInc == 1 && shares >= 1){
                         action = sell
+                    } else if (stockPrice < cash && recent50AvgInc == 2){
+                        action = buy
+                    } 
+                case 4 =>
+                    if (recent100AvgInc == 1 && shares >= 1){
+                        action = sell
+                    } else if (stockPrice < cash && recent100AvgInc == 2){
+                        action = buy
+                    } 
+                case _ => 
+                    if (Random.nextBoolean){
+                        if (stockPrice < cash) {
+                            action = buy
+                        } 
+                    } else {
+                        if (shares > 1) {
+                            action = sell
+                        }
                     }
-                }
+            }
+            if (action == buy) {
+                (buy, cash - stockPrice, shares + 1)
+            } else if (action == sell) {
+                (sell, cash + stockPrice, shares - 1)
+            } else {
+                (0, cash, shares)
+            }
         }
-        if (action == buy) {
-            (buy, cash - stockPrice, shares + 1)
-        } else if (action == sell) {
-            (sell, cash + stockPrice, shares - 1)
-        } else {
-            (0, cash, shares)
-        }
-    }
-       
         
-        def run(id: Long, state: List[List[Double]], messages: List[List[List[Double]]]): List[List[Double]] = {
+        def run(id: Long, state: List[List[Double]], messages: List[List[Double]]): List[List[Double]] = {
             var stock_timeseries: List[Double] = state(0)
             var marketState: List[Double] = state(1)
             // assert(marketState.size == 7)
@@ -159,14 +147,12 @@ object StockMarket {
             var lastRule: Int = rules(5).toInt
             var nextAction: Int = rules(6).toInt
 
-            var idleCountDown: Int = state(5).head.toInt
             // assert(rules.size == 7)
 
             timer += 1 
             if (id != 0) {  // trader 
                 cash = cash * (1 + interestRate)
-                messages.foreach(m => {
-                    val ms = m.head
+                messages.foreach(ms => {
                     val m_dividendPerShare = ms(0)
                     val m_lastAvg = ms(1)
                     val m_currentPrice = ms(2)
@@ -200,8 +186,7 @@ object StockMarket {
                 var buyOrders: Int = 0
                 var sellOrders: Int = 0
 
-                messages.foreach(m => {
-                    val ms = m.head
+                messages.foreach(ms => {
                     if (ms(0)==1) {
                         buyOrders = buyOrders + 1
                     } else if (ms(0)==2) {
@@ -234,18 +219,12 @@ object StockMarket {
                 recent50AvgInc = update(50, timer, lastAvg, stock_timeseries)
                 // Calculate whether avg has increased for past 100 rounds
                 recent100AvgInc = update(100, timer, lastAvg, stock_timeseries)
-                // Send messages to traders
-                if (idleCountDown <= 1) {
-                    idleCountDown = interval
-                } else {
-                    idleCountDown -= 1
-                }
                 // println("Current price is " + currentPrice)
             }
-            List(stock_timeseries, List(lastDividend, lastAvg, currentPrice, dividendIncrease, recent10AvgInc, recent50AvgInc, recent100AvgInc), List(timer), List(cash, shares, estimatedWealth), rules.toList, List(idleCountDown))
+            List(stock_timeseries, List(lastDividend, lastAvg, currentPrice, dividendIncrease, recent10AvgInc, recent50AvgInc, recent100AvgInc), List(timer), List(cash, shares, estimatedWealth), rules.toList)
         }
 
-        def sendMessage(id: Long, state: List[List[Double]]): List[List[Double]] = {
+        def sendMessage(id: Long, state: List[List[Double]]): List[Double] = {
             val marketState: List[Double] = state(1)
             // assert(marketState.size == 7)
             var lastDividend: Double = marketState(0)
@@ -256,23 +235,14 @@ object StockMarket {
             var recent50AvgInc: Double = marketState(5)    
             var recent100AvgInc: Double = marketState(6)                   
             val rules: List[Double] = state(4)
-            val idleCountDown: Int = state(5).head.toInt
 
-            if (idleCountDown == 1) {
-                if (id == 0) {
-                     Range(0, cfreq).map(i => List(lastDividend, lastAvg, currentPrice, dividendIncrease, recent10AvgInc, recent50AvgInc, recent100AvgInc)).toList
-                } else {
-                    Range(0, cfreq).map(i => List(rules(6))).toList
-                }
+            if (id == 0) {
+                    List(lastDividend, lastAvg, currentPrice, dividendIncrease, recent10AvgInc, recent50AvgInc, recent100AvgInc)
             } else {
-                if (id == 0) {
-                    List(List(0))
-                } else {
-                    List()
-                }
-            }            
+                List(rules(6))
+            }
         }
 
-        Simulate[List[List[Double]], List[List[Double]]](vertices, run, sendMessage, edges, List(), maxIterations)
+        Simulate[List[List[Double]], List[Double]](vertices, run, sendMessage, graph.adjacencyList().mapValues(_.toList), List(), maxIterations)
     }
 }

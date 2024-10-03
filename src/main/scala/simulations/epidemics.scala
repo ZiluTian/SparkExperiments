@@ -2,33 +2,26 @@ package simulations
 
 import scala.util.Random
 import scala.io.Source
-import scala.math.{max}
+import scala.math.{max, abs}
 import breeze.stats.distributions.Gamma
 
 object Epidemics {
     def main(args: Array[String]): Unit = {
-        val edgeFilePath: String = args(0)
-        val cfreq: Int = args(1).toInt
-        val interval: Int = args(2).toInt
+        val totalAgents: Int = args(0).toInt
 
-        val source = Source.fromFile(edgeFilePath)
-        var edges: Map[Long, List[Long]] = Map[Long, List[Long]]()
-
-        for (line <- source.getLines()) {
-            val fields = line.split(" ")
-            val srcId: Long = fields(0).toLong
-            val dstId: Long = fields(1).toLong
-            edges = edges + (srcId -> (dstId :: edges.getOrElse(srcId, List())))
+        val graph = if (totalAgents < 0) {
+            util.GraphFactory.stochasticBlock(abs(totalAgents), 0.01, 0, 5)
+        } else {
+            util.GraphFactory.erdosRenyi(totalAgents, 0.01)
         }
-        source.close()
 
-        val vertices: List[(Long, List[Int])] = edges.map(i => {
+        val vertices: List[(Long, List[Int])] = graph.adjacencyList().map(i => {
             val age: Int = Random.nextInt(90) + 10
             val symptomatic: Int = if (Random.nextBoolean) 1 else 0
             val health: Int = if (Random.nextInt(100)==0) 2 else 0
             val vulnerability: Int = if (age > 60) 1 else 0
             val daysInfected: Int = 0
-            (i._1, List(age, symptomatic, health, vulnerability, daysInfected, interval))
+            (i._1, List(age, symptomatic, health, vulnerability, daysInfected))
         }).toList
 
         // define the maximum number of iterations
@@ -118,48 +111,43 @@ object Epidemics {
             }
         }
         
-        def run(id: Long, state: List[Int], messages: List[List[Double]]): List[Int] = {
+        def run(id: Long, state: List[Int], messages: List[Double]): List[Int] = {
             val age: Int = state(0)
             val symptomatic: Int = state(1)
             var health: Int = state(2)
             val vulnerability: Int = state(3)
             var daysInfected: Int = state(4)
-            var idleCountDown: Int = state(5)
 
-            if (idleCountDown > 1) {
-                idleCountDown -= 1
-            } else {
-                idleCountDown = interval
-                if (id != 0) { // people
-                    if (health != Deceased) {
-                        if ((health != Susceptible) && (health != Recover)) {
-                            if (daysInfected == stateDuration(health)) {
-                                // health = 4
+            if (id != 0) { // people
+                if (health != Deceased) {
+                    if ((health != Susceptible) && (health != Recover)) {
+                        if (daysInfected == stateDuration(health)) {
+                            // health = 4
+                            health = change(health, vulnerability)
+                            daysInfected = 0
+                        } else {
+                            daysInfected = daysInfected + 1
+                        }
+                    }
+
+                    messages.foreach(m => {
+                        if (health==0) {
+                            var risk: Double = m
+                            if (age > 60) {
+                                risk = risk * 2
+                            } 
+                            if (risk > 1) {
                                 health = change(health, vulnerability)
-                                daysInfected = 0
-                            } else {
-                                daysInfected = daysInfected + 1
                             }
                         }
-
-                        messages.foreach(m => {
-                            if (health==0) {
-                                var risk: Double = m.head
-                                if (age > 60) {
-                                    risk = risk * 2
-                                } 
-                                if (risk > 1) {
-                                    health = change(health, vulnerability)
-                                }
-                            }
-                        })
-                    }
-                } 
-            }
-            List(age, symptomatic, health, vulnerability, daysInfected, idleCountDown)
+                    })
+                }
+            } 
+            
+            List(age, symptomatic, health, vulnerability, daysInfected)
         }
 
-        def sendMessage(id: Long, state: List[Int]): List[Double] = {
+        def sendMessage(id: Long, state: List[Int]): Double = {
             val age: Int = state(0)
             val symptomatic: Int = state(1)
             var health: Int = state(2)
@@ -167,20 +155,14 @@ object Epidemics {
             var daysInfected: Int = state(4)
             var idleCountDown: Int = state(5)
 
-            if (idleCountDown == 1) {
-                val SymptomaticBool: Boolean = if (symptomatic == 1) true else false
-                // Calculate infectiousness once
-                val infectious: Double = infectiousness(health.toInt, SymptomaticBool)
-                Range(0, cfreq).map(_ => infectious).toList
+            // Calculate infectiousness once
+            if (symptomatic == 1){
+                infectiousness(health.toInt, true)        
             } else {
-                if (id == 0) {
-                    List(0)
-                } else {
-                    List()
-                }
-            }            
+                infectiousness(health.toInt, false)
+            }
         }
 
-        Simulate[List[Int], List[Double]](vertices, run, sendMessage, edges, List(), maxIterations)
+        Simulate[List[Int], Double](vertices, run, sendMessage, graph.adjacencyList().mapValues(_.toList), List(), maxIterations)
     }
 }

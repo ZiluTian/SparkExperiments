@@ -5,27 +5,16 @@ import scala.io.Source
 
 object GameOfLife {
     def main(args: Array[String]): Unit = {
-        val edgeFilePath: String = args(0)
-        val cfreq: Int = args(1).toInt
-        val interval: Int = args(2).toInt
+        val totalAgents: Int = args(0).toInt
+        val width: Int = 100
+        val graph = util.GraphFactory.torus2D(width, (totalAgents / width).toInt)
 
-        val source = Source.fromFile(edgeFilePath)
-        var edges: Map[Long, List[Long]] = Map[Long, List[Long]]()
+        val vertices: List[(Long, Boolean)] = graph.nodes.map(i => (i, Random.nextBoolean())).toList
 
-        for (line <- source.getLines()) {
-            val fields = line.split(" ")
-            val srcId: Long = fields(0).toLong
-            val dstId: Long = fields(1).toLong
-            edges = edges + (srcId -> (dstId :: edges.getOrElse(srcId, List())))
-        }
-        source.close()
-
-        val vertices: List[(Long, Boolean)] = edges.map(i => (i._1, Random.nextBoolean())).toList
-
-        def run(id: Long, alive: Boolean, messages: List[List[Boolean]]): Boolean = {
+        def run(id: Long, alive: Boolean, messages: List[Boolean]): Boolean = {
             // println(f"Received ${messages.flatten.size} messages!")
-            val  aliveNeighbors = messages.flatten.filter(_==true).size
-            if (alive && (aliveNeighbors > 3*cfreq || aliveNeighbors < 2*cfreq)) {
+            val  aliveNeighbors = messages.filter(_==true).size
+            if (alive && (aliveNeighbors > 3 || aliveNeighbors < 2)) {
                 true
             } else if ((!alive) && (aliveNeighbors==3)) {
                 false
@@ -34,10 +23,10 @@ object GameOfLife {
             }
         }
 
-        def sendMessage(id: Long, alive: Boolean): List[Boolean] = {
-            Range(0, cfreq).map(_ => alive).toList
+        def sendMessage(id: Long, alive: Boolean): Boolean = {
+            alive
         }
 
-        Simulate[Boolean, List[Boolean]](vertices, run, sendMessage, edges, List(), 200)
+        Simulate[Boolean, Boolean](vertices, run, sendMessage, graph.adjacencyList().mapValues(_.toList), List(), 200)
     }
 }

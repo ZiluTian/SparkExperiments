@@ -9,24 +9,25 @@ from datetime import datetime
 MICRO_BENCHMARK = ""
 UBER_JAR = "target/scala-2.12/SparkExperiments-assembly-1.0-SNAPSHOT.jar"
 
-def run(cores, cfreqs, cintervals):
-    for core in cores:
-        for cfreq in cfreqs:
-            for cint in cintervals:
-                for experiment in EXPERIMENTS:
-                    for input_file in config[experiment]['input_graph']:
-                        print(f"Running {input_file} {experiment} cores {core} communication frequency is {cfreq} computation interval is {cint}")
-                        cp = config[experiment]["classpath"]
-                        now = datetime.now()
-                        current_time = now.strftime("%H%M%S")
-                        if not os.path.exists(f"{LOG_DIR}/{ITERATION}"):
-                            os.makedirs(f"{LOG_DIR}/{ITERATION}")
-                        log_file = open(f"{LOG_DIR}/{ITERATION}/{MICRO_BENCHMARK}_{experiment}_cores{core}_cfreq{cfreq}_cint{cint}_{current_time}", 'a')
-                        process = subprocess.run([f'{SPARK_HOME}/bin/spark-submit', '--master', SPARK_MASTER, '--executor-cores', str(core), '--driver-memory', str(SPARK_DRIVER_MEM), '--executor-memory', str(SPARK_EXECUTOR_MEM), '--class', cp, UBER_JAR, input_file, str(cfreq), str(cint)], text=True, stdout=subprocess.PIPE, check=True)
-                        print(process.stdout, file=log_file)
-                        os.system('echo 3 > /proc/sys/vm/drop_caches')
-                        log_file.flush()
-                        log_file.close()
+def run():
+    for experiment in EXPERIMENTS:    
+        for totalAgents in config[experiment]["totalAgents"]:
+            core = abs(int(totalAgents / 1000))
+            print(f"Running {experiment} cores {core} total agents {totalAgents}")
+            cp = config[experiment]["classpath"]
+            now = datetime.now()
+            current_time = now.strftime("%H%M%S")
+            if os.path.exists(f"{LOG_DIR}/{ITERATION}"):
+                print(f"Directory {LOG_DIR}/{ITERATION} exists")
+            else:
+                os.makedirs(f"{LOG_DIR}/{ITERATION}")
+                print(f"Make directory {LOG_DIR}/{ITERATION}")
+            log_file = open(f"{LOG_DIR}/{ITERATION}/{experiment}Test.log_{MICRO_BENCHMARK}_cores{core}_{current_time}", 'a')
+            process = subprocess.run([f'{SPARK_HOME}/bin/spark-submit', '--master', SPARK_MASTER, '--executor-cores', str(core), '--driver-memory', str(SPARK_DRIVER_MEM), '--executor-memory', str(SPARK_EXECUTOR_MEM), '--class', cp, UBER_JAR, str(totalAgents)], text=True, stdout=subprocess.PIPE, check=True)
+            print(process.stdout, file=log_file)
+            # os.system('echo 3 > /proc/sys/vm/drop_caches')
+            log_file.flush()
+            log_file.close()
 
 if (__name__ == "__main__"):
     for i in range(1, len(sys.argv)):
@@ -42,7 +43,6 @@ if (__name__ == "__main__"):
     config = json.load(f)
 
     EXPERIMENTS = config['experiments']
-    REPEAT = config['repeat']
     LOG_DIR = config['log_dir']
 
     SPARK_HOME=config['spark']['home']
@@ -53,11 +53,11 @@ if (__name__ == "__main__"):
     if (not os.path.exists(LOG_DIR)):
         os.makedirs(f"{LOG_DIR}")
 
-    # Always clean the build before running experiments, which removes the uber jar
-    subprocess.run(['sbt', 'clean'])
-    # Generate the uber jar after 
-    subprocess.run(['sbt', '-DsparkDeploy=Cluster', 'assembly'], text=True, stdout=subprocess.PIPE, check=True)
+    # # Always clean the build before running experiments, which removes the uber jar
+    # subprocess.run(['sbt', 'clean'])
+    # # Generate the uber jar after 
+    # subprocess.run(['sbt', '-DsparkDeploy=Cluster', 'assembly'], text=True, stdout=subprocess.PIPE, check=True)
 
-    for i in range(REPEAT):
+    for i in [0, 1, 2]:
         ITERATION = i
-        run(config['cores'], config['cfreqs'], config['cinterval'])
+        run()
